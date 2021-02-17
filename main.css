@@ -21,8 +21,11 @@ body {
 }
 .container {
     max-width: 30rem;
+    max-width: 22.4rem;
 }
 img {
+    margin: 0 auto;
+    height: 100%;
     max-width: 100%;
 }
 
