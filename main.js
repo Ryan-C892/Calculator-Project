@@ -27,6 +27,29 @@ function inputDecimal(dot) {
         calculator.displayValue = calculator.displayValue + dot;
     }
 }
+// If divide by zero //
+function zero() {
+    let description = [
+        "https://64.media.tumblr.com/0dac9c4a0d340e5de41a37f351d6773d/094e648c7e3710ba-5a/s500x750/26ad1bda56c4afca0492e07f38ea2e470a084d9d.gifv",
+        "https://i.pinimg.com/originals/e0/80/02/e080022895bad950703d80f13da1f368.gif",
+        "https://64.media.tumblr.com/tumblr_ltp1izbOd71qzpy7ko1_r1_500.gifv",
+        "https://64.media.tumblr.com/c3794f85dee18225304d9bdce03f57c3/tumblr_mud8niZYup1rsdpaso1_500.gifv",
+        "https://64.media.tumblr.com/6697bf7acd11019a797b7099ce35006f/tumblr_o4e0erPFXs1rsdpaso1_500.gif",
+        "https://i.pinimg.com/originals/f2/a6/bf/f2a6bf50228f8e056b47ae56aae7862a.gif",
+        "https://i.pinimg.com/originals/b6/83/78/b683780882e8225f6014ab21f91434ed.gif",
+        "https://64.media.tumblr.com/ed365c1d78ccb7c86818d0b4fe397fa2/tumblr_n4m762IKW61rsdpaso1_400.gifv",
+        "https://media4.giphy.com/media/iIkZ9Wr3Nmoso/giphy.gif?cid=ecf05e47ol3e5sckreptpthz493cruwqbeqk7u03rewgbdc2&rid=giphy.gif",
+        "https://64.media.tumblr.com/tumblr_memc7wbtjK1rsdpaso1_640.gifv",
+        "https://media0.giphy.com/media/d1jHu2CAaRRG8/giphy.gif",
+        "https://64.media.tumblr.com/6dcad26d4e71b6429b0a4bec17ca357c/tumblr_ps0s1dDRTa1rsdpaso1_500.gifv"
+    ];
+
+    let size = description.length;
+    let random = Math.floor(size * Math.random());
+    document.getElementById('image').src=description[random];
+    let para = document.querySelector('.calculator_display');
+    para.value = "You Just Divided By Zero!";
+}
 // If button is equal //
 function handleOperator(nextOperator) {
     const { firstNum, displayValue, operator } = calculator;
@@ -78,8 +101,8 @@ function operate(firstNum, secondNum, operator) {
         return firstNum * secondNum;
     }
     function divide(firstNum, secondNum) {
-        if (firstNum === 0) {
-            return "You just divided by zero!"
+        if (secondNum === 0) {
+            return zero();
         } else {
             return firstNum / secondNum;
         }
@@ -98,6 +121,7 @@ function clearCalculator() {
     calculator.firstNum = null;
     calculator.secondNum = false;
     calculator.operator = null;
+    document.getElementById('image').src="";
     console.log(calculator);
 }
 // Delete //
@@ -142,7 +166,6 @@ keys.addEventListener('click', (event) => {
     inputNum(key.value);
     updateDisplay();
 });
-
 // Keyboard Input //
 document.body.addEventListener('keypress', function(event) {
     let key = event.keyCode;
@@ -174,6 +197,7 @@ document.body.addEventListener('keypress', function(event) {
             calculator.firstNum = null;
             calculator.secondNum = false;
             calculator.operator = null;
+            document.getElementById('image').src="";
         }
         // Copy logic of backSpace() //
         if (key === 100) {
@@ -244,8 +268,9 @@ document.body.addEventListener('keypress', function(event) {
                 return firstNum * secondNum;
             }
             if (operator === 'divide') {
-                if (firstNum === 0) {
-                    return "You just divided by zero!"
+                if (secondNum === 0) {
+                    zero();
+                    document.querySelector('.calculator_display') = "You Just Divided By Zero!";
                 } else {
                     return firstNum / secondNum;
                 }
